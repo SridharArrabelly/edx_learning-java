@@ -14,6 +14,10 @@ Part 3 - Time difference
 Part 4 - Country area
 Part 5 - Rounding numbers
 Extra - Calculating distances
+
+The solution used only basic statements, without any kind
+of control structure. Two functions where created, even not being
+subject of the first module of the course.
 */
 
 
