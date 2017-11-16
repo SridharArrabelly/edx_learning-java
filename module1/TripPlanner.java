@@ -1,9 +1,9 @@
 /*
-Author: Claudio Castello
-http://github.com/claudiocastello
-
 edX Learn Programming with Java
 Module 1 Project - Trip Planner
+
+Author: Claudio Castello
+http://github.com/claudiocastello
 
 The programm asks for users some info about an international trip
 and make some conversions to help the users to plan their trip.
