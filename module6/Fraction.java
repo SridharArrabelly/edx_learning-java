@@ -41,7 +41,10 @@ public class Fraction {
   }
 
   public String toString() {
-    return numerator + "/" + denominator;
+    if (this.denominator == 1) {
+      return Integer.toString(this.numerator);
+    }
+    return Integer.toString(this.numerator) + "/" + Integer.toString(this.denominator);
   }
 
   public double toDouble() {
