@@ -74,8 +74,8 @@ public class FractionCalculator {
         System.out.println(fraction1.toString() + " " + operation + " " + fraction2.toString() + " = " + newFraction.toString());
       }
     }
-
-
+    input.close();
+    stremReader.close();
   } // end main()
 
   // Method to get user desired operation on fractions.
