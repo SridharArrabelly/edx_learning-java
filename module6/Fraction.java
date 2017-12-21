@@ -1,3 +1,12 @@
+/*
+ Objected Oriented Programming in Java
+ Title: Module 2 Project - Fraction Calculator
+ File: Fraction.java
+ Author: Claudio Castello
+ GitHub: http://github.com/claudiocastello
+ email: floggio.dev@gmail.com
+ */
+
 /*** Class Declaration ***/
 
 public class Fraction {
@@ -9,19 +18,16 @@ public class Fraction {
   public Fraction(int numerator, int denominator) {
     if (denominator == 0) {
       throw new IllegalArgumentException("Denominator can't be zero.");
-    } else if ((numerator < 0 && denominator < 0) || (denominator < 0)) {
-        numerator *= -1;
-        denominator *= -1;
+    }
+    if (denominator < 0) {
+      numerator *= -1;
+      denominator *= -1;
     }
     this.numerator = numerator;
     this.denominator = denominator;
   }
 
   public Fraction(int numerator) {
-    if ((numerator < 0 && denominator < 0) || (denominator < 0)) {
-        numerator *= -1;
-        denominator *= -1;
-    }
     this.numerator = numerator;
     this.denominator = 1;
   }
@@ -70,31 +76,37 @@ public class Fraction {
 
 
   public Fraction add(Fraction other) {
-    int newDenominator = LCM(this.getDenominator(), other.getDenominator());
-    int newNumerator1 = newDenominator / this.getDenominator() * this.getNumerator();
-    int newNumerator2 = newDenominator / other.getDenominator() * other.getNumerator();
-    Fraction newFraction = new Fraction(newNumerator1 + newNumerator2, newDenominator);
+    int newDenominator, newNumerator, newNumerator1, newNumerator2;
+    newDenominator = LCM(this.getDenominator(), other.getDenominator());
+    newNumerator1 = newDenominator / this.getDenominator() * this.getNumerator();
+    newNumerator2 = newDenominator / other.getDenominator() * other.getNumerator();
+    newNumerator = newNumerator1 + newNumerator2;
+    Fraction newFraction = new Fraction(newNumerator, newDenominator);
     return newFraction;
   }
 
   public Fraction subtraction(Fraction other) {
-    int newDenominator = LCM(this.getDenominator(), other.getDenominator());
-    int newNumerator1 = newDenominator / this.getDenominator() * this.getNumerator();
-    int newNumerator2 = newDenominator / other.getDenominator() * other.getNumerator();
-    Fraction newFraction = new Fraction(newNumerator1 - newNumerator2, newDenominator);
+    int newDenominator, newNumerator, newNumerator1, newNumerator2;
+    newDenominator = LCM(this.getDenominator(), other.getDenominator());
+    newNumerator1 = (newDenominator / this.getDenominator()) * this.getNumerator();
+    newNumerator2 = (newDenominator / other.getDenominator()) * other.getNumerator();
+    newNumerator = newNumerator1 - newNumerator2;
+    Fraction newFraction = new Fraction(newNumerator, newDenominator);
     return newFraction;
   }
 
   public Fraction multiply(Fraction other) {
-    int newNumerator = this.getNumerator() * other.getNumerator();
-    int newDenominator = this.getDenominator() * other.getDenominator();
+    int newNumerator, newDenominator;
+    newNumerator = this.getNumerator() * other.getNumerator();
+    newDenominator = this.getDenominator() * other.getDenominator();
     Fraction newFraction = new Fraction(newNumerator, newDenominator);
     return newFraction;
   }
 
   public Fraction divide(Fraction other) {
-    int newNumerator = this.getNumerator() * other.getDenominator();
-    int newDenominator = this.getDenominator() * other.getNumerator();
+    int newNumerator, newDenominator;
+    newNumerator = this.getNumerator() * other.getDenominator();
+    newDenominator = this.getDenominator() * other.getNumerator();
     Fraction newFraction = new Fraction(newNumerator, newDenominator);
     return newFraction;
   }
@@ -119,6 +131,9 @@ public class Fraction {
     int gcf = GCF(this.getNumerator(), getDenominator());
     this.numerator = this.getNumerator() / gcf;
     this.denominator = this.getDenominator() / gcf;
+    if (this.denominator < 0) {
+      this.numerator *= -1;
+      this.denominator *= -1;
+    }
   }
-
 }
