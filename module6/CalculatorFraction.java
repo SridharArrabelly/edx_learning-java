@@ -8,9 +8,10 @@
  */
 
 import java.util.Arrays;
-import java.io.*;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 
-public class FractionCalculator {
+public class CalculatorFraction {
   // Declaration of InputStreamReader, BufferedReader
   // objects and VALID_OPERATIONS string array.
   static InputStreamReader stremReader = new InputStreamReader(System.in);
