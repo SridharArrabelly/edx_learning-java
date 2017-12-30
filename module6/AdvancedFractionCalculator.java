@@ -20,7 +20,7 @@ class AdvancedFractionCalculator {
   // objects and VALID_OPERATIONS string array.
   static InputStreamReader stremReader = new InputStreamReader(System.in);
   static BufferedReader input = new BufferedReader(stremReader);
-  static String[] VALID_OPERATIONS = {"+", "-", "/", "*", "=", "Q", "q"};
+  static String[] VALID_OPERATIONS = {"+", "-", "/", "*", "="};
 
   public static void main(String[] args) throws Exception {
     // Get user input for desired operation
@@ -30,7 +30,6 @@ class AdvancedFractionCalculator {
     System.out.println("This program is a Fraction Calculator");
     System.out.println("It will add, subtract, multiply and divide fractions ultil you type Q to quit.");
     System.out.println("----------------------------------------------------------------------------------");
-
 
     // Keep program running while user input is not Q or q
     while (!quitProgram) {
@@ -44,43 +43,31 @@ class AdvancedFractionCalculator {
       else {
         try {
           String[] splittedString = singleLine.split(" ");
+          Fraction fraction1, fraction2, newFraction;
+          String operation = splittedString[1];
 
           // Get fraction in splittedString[0], fraction in splittedString[2]
           // and performs the operation in splittedString[1].
-          Fraction fraction1, fraction2, newFraction;
-          String operation = splittedString[1];
 
           fraction1 = getFraction(splittedString[0]);
           fraction2 = getFraction(splittedString[2]);
 
-          // Performs operation on user fractions
-          // Look for the four basic operations...
-          if (operation.equals("+")) {
-            newFraction = fraction1.add(fraction2);
-          }
-          else if (operation.equals("-")) {
-            newFraction = fraction1.subtraction(fraction2);
-          }
-          else if (operation.equals("/")) {
-            newFraction = fraction1.divide(fraction2);
-          }
-          else if (operation.equals("*")) {
-            newFraction = fraction1.multiply(fraction2);
-          }
-          // If not found, test for fraction equality
-          else {
+          if (operation.equals("=")) {
             testEquality = fraction1.equals(fraction2);
             System.out.println(fraction1.toString() + " = " + fraction2.toString() + " is " + testEquality);
             continue;
+          }
+          else {
+            newFraction = performOperation(fraction1, fraction2, operation);
           }
 
           newFraction.toLowestTerms();
           System.out.println(fraction1.toString() + " " + operation + " " + fraction2.toString() + " = " + newFraction.toString());
         } // end try
-        
+
         // If excpetion raised...
         catch (IllegalArgumentException e) {
-          System.out.println("Invalid fraction. Denominator can't be zero.");
+          System.out.println("Invalid fraction. Denominator can't be zero.\n");
         }
       } // end else
     } // end while loop
@@ -128,12 +115,15 @@ class AdvancedFractionCalculator {
       return false;
     }
     else if (!validOperation(splittedString[1])) {
+      System.out.println("Invalid Operation. Try '+', '-', '/', '*' or '=':\n");
       return false;
     }
     else if (!validFraction(splittedString[0])) {
+      System.out.println("Invalid fraction. Try the format 'a/b' or 'a' where a and b are integers:\n");
       return false;
     }
     else if (!validFraction(splittedString[2])) {
+      System.out.println("Invalid fraction. Try the format 'a/b' or 'a' where a and b are integers:\n");
       return false;
     }
     else {
@@ -220,14 +210,6 @@ class AdvancedFractionCalculator {
     String[] splittedString;
     Fraction fraction = new Fraction();
 
-    while (!validFraction(userInput)) {
-      // Test for a valid input from users based on the rules
-      // of validFraction method. Keep asking until a valid
-      // input is inserted.
-      System.out.print("Invalid Fraction. Please enter (a/b) or (a), where a and b are integers and b is not zero: ");
-      userInput = input.readLine();
-    }
-
     // Split the valid input to build the Fraction object.
     splittedString = userInput.split("/");
 
@@ -255,5 +237,26 @@ class AdvancedFractionCalculator {
     }
     return fraction;
   } // end getFraction() method
+
+
+  // Perform the desired operation in the user fractions
+  // Basic operations + - / *
+  public static Fraction performOperation(Fraction fraction1, Fraction fraction2, String operation) {
+    boolean testEquality;
+    // Performs operation on user fractions
+    // Look for the four basic operations...
+    if (operation.equals("+")) {
+      return fraction1.add(fraction2);
+    }
+    else if (operation.equals("-")) {
+      return fraction1.subtraction(fraction2);
+    }
+    else if (operation.equals("/")) {
+      return fraction1.divide(fraction2);
+    }
+    else {
+      return fraction1.multiply(fraction2);
+    }
+  }
 
 } // end AdvancedFractionCalculator class
