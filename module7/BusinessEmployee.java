@@ -1,5 +1,5 @@
 
-public class BusinessEmployee extends Employee {
+public abstract class BusinessEmployee extends Employee {
   // Class State
   double bonusBudget;
 

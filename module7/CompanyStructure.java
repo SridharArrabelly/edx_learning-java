@@ -40,14 +40,11 @@ class CompanyStructure {
     System.out.println(CFO.getTeamStatus());
 
     System.out.println("\nSatya request 5000 of bonus.");
-    CTO.requestBonus(actA, 5000);
-    System.out.println(actA.employeeStatus());
+    CTO.requestBonusBL(CFO, 5000);
+    System.out.println(CFO.getTeamStatus());
 
-
-    // Accountant actA = new Accountant("Niky");
-    //
-    // CFO.addReport(actA, CTO);
-    // CFO.addReport(actB, VPofENG);
-    // System.out.println(CFO.getTeamStatus());
+    System.out.println("\nBill request 83000 of bonus.");
+    VPofENG.requestBonusBL(CFO, 83000);
+    System.out.println(CFO.getTeamStatus());
   }
 }

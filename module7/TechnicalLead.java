@@ -96,4 +96,10 @@ public class TechnicalLead extends TechnicalEmployee {
     }
     return false;
   }
+
+  public boolean requestBonusBL(BusinessLead businessLead, double bonus) {
+    businessLead.approveBonusRequest(this, bonus);
+    return true;
+  }
+
 }

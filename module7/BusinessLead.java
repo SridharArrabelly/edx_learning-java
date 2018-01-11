@@ -36,10 +36,25 @@ public class BusinessLead extends BusinessEmployee {
     if (this.hasHeadCount()) {
       this.directReports.add(employee);
       this.headCount -= 1;
-      this.bonusBudget += employee.getBaseSalary() * 1.1;
       employee.manager = this;
       employee.supportTeam(team);
+      this.bonusBudget += employee.getBudget();
       return true;
+    }
+    return false;
+  }
+
+
+  public boolean approveBonusRequest(TechnicalLead techLead, double bonus) {
+    boolean approvedBonus;
+    for (Accountant accountant : directReports) {
+      if (accountant.getTeamSupported().equals(techLead)) {
+        approvedBonus = accountant.approveBonus(bonus); // true or false
+        if (approvedBonus) {
+          this.bonusBudget -= bonus;
+        }
+        return approvedBonus;
+      }
     }
     return false;
   }
@@ -52,8 +67,8 @@ public class BusinessLead extends BusinessEmployee {
       return teamStatus;
     }
     teamStatus += " and is managing:\n";
-    for (Accountant employee : directReports) {
-      teamStatus += "  " + employee.employeeStatus() + "\n";
+    for (Accountant accountant : directReports) {
+      teamStatus += "  " + accountant.employeeStatus() + "\n";
     }
     return teamStatus;
   }
